@@ -1,0 +1,57 @@
+/* custom styles */
+body {
+  background-image: url('../images/galactic-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.banner {
+  background-image: url('../images/banner-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 40vh;
+  padding-top: 66px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom: solid 3px gray;
+}
+.banner-text {
+  border: solid 3px white;
+  background-color: rgba(67, 109, 188, 0.2);
+  font-size: 2em;
+  line-height: 1.8;
+}
+.nav-item {
+  width: 15vw;
+}
+.current {
+  border-bottom: solid 4px rgb(67, 109, 188);
+  font-weight: 700;
+}
+.top-info-bar {
+  background-color: rgba(78, 78, 78, 0.6);
+  position: fixed;
+  height: 46px;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.content-area {
+  margin-top: 40vh;
+}
+/* panel styles */
+.panel-banner {
+  background-color: rgba(99, 120, 160, 0.6);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 15vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom: solid 3px gray;
+  align-content: middle;
+}
+.panel-content {
+  margin-top: 15vh;
+}

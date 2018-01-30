@@ -1,0 +1,84 @@
+{% import "_macros.html.twig" as macros %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block stylesheets %}
+      <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+      <link href="{{ asset('assets/css/font-awesome.min.css')}}" rel="stylesheet" />
+      <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet" />
+      <script type="text/javascript" src="{{ asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+      <script type="text/javascript" src="{{ asset('assets/js/popper.min.js')}}"></script>
+      <script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+    <title>{% block title %}{{ macros.print_path() }}{% endblock %}</title>
+  </head>
+  <body>
+    {% block nav %}
+    <div class="row">
+      <div class="col-12 text-white text-center p-2 top-info-bar">
+        <div class="dropup">
+          <button
+            class="btn btn-sm btn-primary pull-left d-lg-none d-xl-none"
+            id="navigationButton"
+            type="button"
+            name="navigation"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="navigationButton">
+            <a class="dropdown-item" href="{{ path('home') }}">Home</a>
+            <a class="dropdown-item" href="{{ path('gallery') }}">Gallery</a>
+            <a class="dropdown-item" href="{{ path('post') }}">Posts</a>
+            <a class="dropdown-item" href="{{ path('about') }}">About</a>
+          </div>
+        </div>
+        <p class="align-middle">{{ macros.print_path() }}</p>
+      </div>
+    </div>
+    {% block banner %}
+    <div class="row">
+      <div class="col-12 banner text-white">
+        <span class="banner-text px-3">SIMPLEBLOG PHP</span>
+      </div>
+    </div>
+    {% endblock %}
+    <div class="container-fluid px-5 content-area bg-white">
+      <div class="row">
+        <div class="col-12">
+          <ul
+            class="nav justify-content-center d-none d-lg-flex d-xl-flex navigation-top"
+            style="border-bottom: solid 1px gray;"
+          >
+            <li class="nav-item text-center">
+              <a class="nav-link {{ macros.is_active('') }}" href="{{ path('home') }}">Home</a>
+            </li>
+            <li class="nav-item text-center">
+              <a class="nav-link {{ macros.is_active('gallery') }}" href="{{ path('gallery') }}">Gallery</a>
+            </li>
+            <li class="nav-item text-center">
+              <a class="nav-link {{ macros.is_active('post') }}" href="{{ path('post') }}">Posts</a>
+            </li>
+            <li class="nav-item text-center">
+              <a class="nav-link {{ macros.is_active('about') }}" href="{{ path('about') }}">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    {% endblock %}
+    <div class="row">
+        <div class="col-12 container">
+        {% block body %}{% endblock %}
+        </div>
+      </div>
+    </div>
+    {% block javascripts %}
+    <script type="text/javascript" src="{{ asset('assets/animations/navLinksHoverAnim.js') }}"></script>
+    {% endblock %}
+  </body>
+</html>

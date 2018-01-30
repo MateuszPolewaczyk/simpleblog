@@ -1,0 +1,33 @@
+{% extends 'panel/panel.html.twig' %}
+
+{% block body %}
+  <h3 class="text-primary text-center">Post editor</h1>
+  <div class="col-12 form-group">
+  	{{ form_start(form) }}
+  	<div class="row">
+  		<div class="col-12 p-3">
+			{{ form_widget(
+				form.title, {'attr': {
+					'class': 'form-control', 
+					'placeholder': 'Title', 
+					'maxlength': "100"
+					}
+				})
+			}}
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-12">
+  			{{ form_widget(
+				form.introText, {'attr': {
+					'class': 'form-control',
+					'style': 'height: 100vh;',
+					'placeholder': 'Introduction text', 
+					}
+				}) 
+			}}
+  		</div>
+  	</div>
+	{{ form_end(form) }}
+  </div>
+{% endblock %}

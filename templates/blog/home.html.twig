@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1 class="text-danger text-center">{{ welcome }}</h1>
+  <h2>{{ path('home') }}</h2>
+  <h3>{{ app.request.pathinfo }}</h3>
+{% endblock %}

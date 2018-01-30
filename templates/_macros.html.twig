@@ -1,0 +1,15 @@
+{% macro is_active(nav) %}{% if app.request.pathinfo|split('/')[1] == nav %}current{% endif %}{% endmacro %}
+{% macro print_path() %}
+	{% if app.request.pathinfo|split('/')[1] == '' %}
+		Home
+	{% endif %}
+	{% if app.request.pathinfo|split('/')[1] == 'gallery' %}
+	    Gallery
+	{% endif %}
+	{% if app.request.pathinfo|split('/')[1] == 'post' %}
+	    Posts
+	{% endif %}
+	{% if app.request.pathinfo|split('/')[1] == 'about' %}
+	    About
+	{% endif %}
+{% endmacro %}

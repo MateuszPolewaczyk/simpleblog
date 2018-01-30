@@ -1,0 +1,16 @@
+{% extends 'panel.html.twig' %}
+
+{% block body %}
+	<a href="{{ path('writePost') }}">Write New Post</a>
+	<div>
+		<ul>
+			{% for post in posts %}
+	    		<li>
+	    			<a href="{{ path('showPost', {id: post.id}) }}">
+	    				{{ post.title }}
+	    			</a>
+	    		</li>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

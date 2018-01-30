@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <h1 class="text-danger text-center">Your lucky number is {{ number }}</h1>
+  <h2>{{ path('gallery') }}</h2>
+  <h3>{{ app.request.pathinfo }}</h3>
+{% endblock %}
