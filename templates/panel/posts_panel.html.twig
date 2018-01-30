@@ -1,16 +1,27 @@
-{% extends 'panel.html.twig' %}
+{% extends 'panel/panel.html.twig' %}
 
 {% block body %}
-	<a href="{{ path('writePost') }}">Write New Post</a>
+	<div class="row p-2">
+		<a class="btn btn-sm btn-primary" href="{{ path('createPost') }}">Create Post</a>
+	</div>
 	<div>
-		<ul>
-			{% for post in posts %}
-	    		<li>
-	    			<a href="{{ path('showPost', {id: post.id}) }}">
-	    				{{ post.title }}
-	    			</a>
-	    		</li>
-			{% endfor %}
-		</ul>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">ID</th>
+					<th scope="col">Title</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for post in posts %}
+				<tr>
+	    			<td>{{ post.id }}</td>
+	    			<td>{{ post.title }}</td>
+	    			<td><a href="{{ path('editPost', {id: post.id}) }}"><i class="fa fa-pencil-square-o"></i></a></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
 {% endblock %}
