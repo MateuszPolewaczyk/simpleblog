@@ -18,50 +18,59 @@
           selector: 'textarea',
           plugin: 'a_tinymce_plugin',
           a_plugin_option: true,
-          a_configuration_option: 400
+          a_configuration_option: 400,
+          theme_advanced_resizing: false,
+          theme_advanced_resize_horizontal: false,
+          theme_advanced_resizing_min_height: 480,
         });
       </script>
     {% endblock %}
     <title>{% block title %}Panel{% endblock %}</title>
   </head>
   <body>
-    {% block nav %}
     <div class="container-fluid">
       {% block banner %}
       <div class="row">
-        <div class="col-12 panel-banner text-white">
-          <span class="banner-text px-3 align-middle">PANEL</span>
+        <div class="col-12 panel-banner p-3 text-white">
+          <span class="panel-banner-text px-3 align-middle">ADMIN PANEL</span>
         </div>
       </div>
       {% endblock %}
+    </div>
+    <div class="container-fluid panel-content bg-white">
       <div class="row">
-        <div class="dropup">
-          <button
-            class="btn btn-primary"
-            id="navigationButton"
-            type="button"
-            name="navigation"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <i class="fa fa-bars"></i>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="navigationButton">
-            <a class="dropdown-item" href="{{ path('home') }}">Home</a>
-            <a class="dropdown-item" href="{{ path('gallery') }}">Gallery</a>
-            <a class="dropdown-item" href="{{ path('post') }}">Posts</a>
-            <a class="dropdown-item" href="{{ path('about') }}">About</a>
+        <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 bg-light py-3 text-center">
+          <!-- <span class="text-muted">Menu</span><a class="btn btn-block btn-primary" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-menu" href="#panel-menu">MENU</a> -->
+          <nav class="d-block d-sm-none navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#panel-menu" aria-controls="panel-menu" aria-expanded="false" aria-label="Toggle menu">
+              <span class="navbar-toggler-icon"></span> Menu
+            </button>
+            <div class="col-12 mt-3" id="panel-menu">
+              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-file-text-o"></i> Posts</a>
+              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-tags"></i> Categories</a>
+              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-picture-o"></i> Gallery</a>
+              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-user"></i> About</a>
+              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-comments-o"></i> Comments</a>
+              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-users"></i> Users</a>
+              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-newspaper-o"></i> Newsletter</a>
+            </div>
+          </nav>
+          <div class="d-none d-sm-block">
+            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-file-text-o"></i> Posts</a>
+            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-tags"></i> Categories</a>
+            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-picture-o"></i> Gallery</a>
+            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-user"></i> About</a>
+            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-comments-o"></i> Comments</a>
+            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-users"></i> Users</a>
+            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-newspaper-o"></i> Newsletter</a>
           </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 bg-white">
+          {% block body %}{% endblock %}
         </div>
       </div>
     </div>
-    {% endblock %}
-        <div class="container-fluid px-5 panel-content bg-white">
-          {% block body %}{% endblock %}
-        </div>
     {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('assets/animations/navLinksHoverAnim.js') }}"></script>
     {% endblock %}
   </body>
 </html>

@@ -27,22 +27,23 @@ class PostsController extends Controller
         	'posts' => $posts
         ));
     }
+
   /**
     * @Route("/post/show/{id}", name="showPost")
     */
-  public function showPost($id)
-  {
-  	$repository = $this->getDoctrine()->getRepository(Post::class);
+    public function showPost($id)
+    {
+    	$repository = $this->getDoctrine()->getRepository(Post::class);
 
-  	$post = $repository->find($id);
+    	$post = $repository->find($id);
 
-  	return $this->render('blog/post.html.twig', array(
-        'post' => $post
-    ));
-  }
+    	return $this->render('blog/post.html.twig', array(
+          'post' => $post
+      ));
+    }
 
   /**
-    * @Route("/panel/post/write/{id}", name="editPost")
+    * @Route("/panel/post/edit/{id}", name="editPost")
     */
     public function editPost(Request $request, $id)
     {
@@ -74,25 +75,39 @@ class PostsController extends Controller
     	));
     }
 
-  // /**
-  //   * @Route("/post/save", name="savePost")
-  //   */
-  //   public function savePost()
-  //   {
-  //   	$em = $this->getDoctrine()->getManager();
+    /**
+    * @Route("/panel/post", name="listPosts")
+    */
+    public function listPosts()
+    {
+      $repository = $this->getDoctrine()->getRepository(Post::class);
 
-  //   	$post = new Post();
-  //       $post->setTitle('Second Post');
-  //       $post->setIntroText('Pretty short intro text just to see');
-  //       $post->setBodyTextFirst('Ergonomic and stylish! First body paragraph etc still short but this is just test purpose.');
+      $posts = $repository->findBy(
+        [],
+        [ 'id' => 'DESC' ]
+      );
 
-  //       // tell Doctrine you want to (eventually) save the Product (no queries yet)
-  //       $em->persist($post);
+      return $this->render('panel/posts_panel.html.twig', array(
+          'posts' => $posts
+        ));
+    }
+    
+  /**
+    * @Route("/post/create", name="createPost")
+    */
+    public function createPost()
+    {
+    	$em = $this->getDoctrine()->getManager();
 
-  //       // actually executes the queries (i.e. the INSERT query)
-  //       $em->flush();
+    	$post = new Post();
+      $post->setTitle('New Post');
+      $post->setIntroText('Body Text');
+      $post->setBodyTextFirst('null xD');
 
-  //       return $this->redirectToRoute('post');
-  //   }
+      $em->persist($post);
+      $em->flush();
+
+        return $this->redirectToRoute('listPosts');
+    }
 }
 ?>
