@@ -1,0 +1,51 @@
+{% extends 'panel/panel.html.twig' %}
+
+{% block body %}
+  <h3 class="text-primary text-center">Post editor</h1>
+  <div class="col-12 form-group">
+  	{{ form_start(form) }}
+  	<div class="row">
+  		<div class="col-12 p-3">
+			{{ form_widget(
+				form.title, {'attr': {
+					'class': 'form-control', 
+					'placeholder': 'Title', 
+					'maxlength': "100"
+					}
+				})
+			}}
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-12">
+  			{{ form_widget(
+				form.text, {'attr': {
+					'class': 'form-control',
+					'style': 'height: 55vh;',
+					'placeholder': 'Text', 
+					}
+				}) 
+			}}
+  		</div>
+  	</div>
+    <div class="row pt-2">
+        <div class="col-6">
+            {{ form_widget(
+                form.save, {'attr': {
+                    'class': 'btn btn-sm btn-block btn-outline-primary'
+                    }
+                })
+            }}
+        </div>
+        <div class="col-6">
+            {{ form_widget(
+                form.saveAndExit, {'attr': {
+                    'class': 'btn btn-sm btn-block btn-primary'
+                    }
+                })
+            }}
+        </div>
+    </div>
+	{{ form_end(form) }}
+  </div>
+{% endblock %}

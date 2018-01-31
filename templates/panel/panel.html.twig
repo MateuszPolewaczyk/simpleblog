@@ -40,12 +40,11 @@
     <div class="container-fluid panel-content bg-white">
       <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 bg-light py-3 text-center">
-          <!-- <span class="text-muted">Menu</span><a class="btn btn-block btn-primary" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-menu" href="#panel-menu">MENU</a> -->
           <nav class="d-block d-sm-none navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#panel-menu" aria-controls="panel-menu" aria-expanded="false" aria-label="Toggle menu">
+            <button class="btn-block navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#panel-menu" aria-controls="panel-menu" aria-expanded="false" aria-label="Toggle menu">
               <span class="navbar-toggler-icon"></span> Menu
             </button>
-            <div class="col-12 mt-3" id="panel-menu">
+            <div class="col-12 mt-3 collapse" id="panel-menu">
               <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-file-text-o"></i> Posts</a>
               <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-tags"></i> Categories</a>
               <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-picture-o"></i> Gallery</a>
