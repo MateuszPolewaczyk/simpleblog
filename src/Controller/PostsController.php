@@ -53,8 +53,9 @@ class PostsController extends Controller
 
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class)
-            ->add('introText', TextareaType::class)
+            ->add('text', TextareaType::class)
             ->add('save', SubmitType::class, array('label' => 'Save'))
+            ->add('saveAndExit', SubmitType::class, array('label' => 'Save and Exit'))
             ->getForm();
 
 		  $form->handleRequest($request);
@@ -67,10 +68,12 @@ class PostsController extends Controller
 	        $em->persist($post);
 	        $em->flush();
 
-	        return $this->redirectToRoute('post');
+	        if ($form->get('saveAndExit')->isClicked()) {
+            return $this->redirectToRoute('listPosts');
+          }
 	    }            
 
-    	return $this->render('blog/writePost.html.twig', array(
+    	return $this->render('panel/edit_post.html.twig', array(
     		'form' => $form->createView()
     	));
     }
@@ -101,8 +104,7 @@ class PostsController extends Controller
 
     	$post = new Post();
       $post->setTitle('New Post');
-      $post->setIntroText('Body Text');
-      $post->setBodyTextFirst('null xD');
+      $post->setText('Body Text');
 
       $em->persist($post);
       $em->flush();

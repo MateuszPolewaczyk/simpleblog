@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PostRepository")
@@ -17,34 +18,19 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=false)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text", nullable=false)
      */
-    private $introText;
+    private $text;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="posts")
      */
-    private $bodyTextFirst;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $bodyTextSecond;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $bodyTextThird;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $outroText;
+    private $author;
 
     public function getId()
     {
@@ -61,53 +47,25 @@ class Post
         $this->title = $title;
     }
 
-    public function getIntroText()
+    public function getText()
     {
-        return $this->introText;
+        return $this->text;
     }
 
-    public function setIntroText($introText)
+    public function setText($text)
     {
-        $this->introText = $introText;
+        $this->text = $text;
     }
 
-    public function getBodyTextFirst()
+    public function getAuthor(): User
     {
-        return $this->bodyTextFirst;
+        return $this->author;
     }
 
-    public function setBodyTextFirst($bodyTextFirst)
+    public function setAuthor(User $author)
     {
-        $this->bodyTextFirst = $bodyTextFirst;
-    }
-
-    public function getBodyTextSecond()
-    {
-        return $this->bodyTextSecond;
-    }
-
-    public function setBodyTextSecond($bodyTextSecond)
-    {
-        $this->bodyTextSecond = $bodyTextSecond;
-    }
-
-    public function getBodyTextThird()
-    {
-        return $this->bodyTextThird;
-    }
-
-    public function setBodyTextThird($bodyTextThird)
-    {
-        $this->bodyTextThird = $bodyTextThird;
-    }
-
-    public function getOutroText()
-    {
-        return $this->outroText;
-    }
-
-    public function setOutroText($outroText)
-    {
-        $this->outroText = $outroText;
+        $this->author = $author;
     }
 }
+
+?>
