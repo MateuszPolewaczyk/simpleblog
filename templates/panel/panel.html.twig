@@ -28,6 +28,7 @@
     <title>{% block title %}Panel{% endblock %}</title>
   </head>
   <body>
+    {% include 'env_info_bar.html.twig' %}
     <div class="container-fluid">
       {% block banner %}
       <div class="row">
@@ -45,23 +46,23 @@
               <span class="navbar-toggler-icon"></span> Menu
             </button>
             <div class="col-12 mt-3 collapse" id="panel-menu">
-              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-file-text-o"></i> Posts</a>
-              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-tags"></i> Categories</a>
-              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-picture-o"></i> Gallery</a>
-              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-user"></i> About</a>
-              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-comments-o"></i> Comments</a>
-              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-users"></i> Users</a>
-              <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-newspaper-o"></i> Newsletter</a>
+              <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-file-text-o"></i> Posts</a>
+              <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-tags"></i> Categories</a>
+              <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-picture-o"></i> Gallery</a>
+              <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-user"></i> About</a>
+              <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-comments-o"></i> Comments</a>
+              <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-users"></i> Users</a>
+              <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-newspaper-o"></i> Newsletter</a>
             </div>
           </nav>
           <div class="d-none d-sm-block">
-            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-file-text-o"></i> Posts</a>
-            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-tags"></i> Categories</a>
-            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-picture-o"></i> Gallery</a>
-            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-user"></i> About</a>
-            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-comments-o"></i> Comments</a>
-            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-users"></i> Users</a>
-            <a href="{{ path('listPosts') }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-newspaper-o"></i> Newsletter</a>
+            <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-file-text-o"></i> Posts</a>
+            <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-tags"></i> Categories</a>
+            <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-picture-o"></i> Gallery</a>
+            <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-user"></i> About</a>
+            <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-comments-o"></i> Comments</a>
+            <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-users"></i> Users</a>
+            <a href="{{ path('listPosts', {'skip': 0, 'limit':10 }) }}" class="btn btn-block btn-dark text-left"><i style="width: 1em;" class="fa fa-newspaper-o"></i> Newsletter</a>
           </div>
         </div>
         <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10 bg-white">
