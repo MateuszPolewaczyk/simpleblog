@@ -1,0 +1,29 @@
+{% if app.request.pathinfo|split('/')[3] is defined %}
+  {% set s = app.request.pathinfo|split('/')[3] %}
+{% else %}
+  {% set s = 0 %}
+{% endif %}
+
+{% if pages > 1 %}
+<nav>
+    <ul class="pagination justify-content-center">
+      {% if skip >= limit %}
+          <li class="page-item">
+            <a class="page-link" href="{{ path('listPosts', {'skip': s - limit, 'limit': limit }) }}" tabindex="-1">
+              Previous
+            </a>
+          </li>
+      {% endif %}
+      {% for i in 1..pages %}
+          <li class="page-item"><a class="page-link" href="{{ path(app.request.get('_route'), {'skip': (i - 1) * limit, 'limit': limit }) }}">{{ i }}</a></li>
+      {% endfor %}
+      {% if skip < limit * pages - limit %}
+          <li class="page-item">
+            <a class="page-link" href="{{ path(app.request.get('_route'), {'skip':  s + limit, 'limit': limit }) }}">
+              Next
+            </a>
+          </li>
+      {% endif %}
+    </ul>
+</nav>
+{% endif %}

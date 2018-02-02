@@ -1,0 +1,9 @@
+    {% if app.environment == 'dev' %}
+        <div class="container-fluid bg-success text-center">
+            <h5 class="text-white m-0 p-0">DEVELOPMENT</h5>
+        </div>
+    {% else %}
+        <div class="container-fluid bg-primary text-center">
+            <h5 class="text-white m-0 p-0">PODUCTION</h5>
+        </div>
+    {% endif %}

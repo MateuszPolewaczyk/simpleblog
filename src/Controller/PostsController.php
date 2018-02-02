@@ -8,48 +8,60 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Config\Definition\Exception\Exception;
+use \Datetime;
 
 class PostsController extends Controller
 {
   /**
-    * @Route("/post", name="post")
+    * @Route("post/{skip}/{limit}", defaults={"skip" = 0, "limit" = 10}, name="post")
     */
-    public function index()
+    public function index($skip, $limit)
     {
-    	$repository = $this->getDoctrine()->getRepository(Post::class);
+        $limit < 0 ? $limit = 0 : $limit = $limit;
+        $skip < 0 ? $skip = 0 : $skip = $skip;
 
-    	$posts = $repository->findBy(
-    		[],
-    		[ 'id' => 'DESC' ]
-    	);
+        $repository = $this->getDoctrine()->getRepository(Post::class);
+        
+        $pages = ceil(($repository->count([])/$limit));
 
-    	return $this->render('blog/posts.html.twig', array(
-        	'posts' => $posts
+        $posts = $repository->findBy(
+            [],
+            [ 'id' => 'DESC' ],
+            $limit,
+            $skip
+        );
+
+        return $this->render('blog/posts.html.twig', array(
+            'posts' => $posts,
+            'pages' => $pages,
+            'limit' => $limit,
+            'skip' => $skip
         ));
     }
 
   /**
-    * @Route("/post/show/{id}", name="showPost")
+    * @Route("post/show/{id}", name="showPost")
     */
     public function showPost($id)
     {
-    	$repository = $this->getDoctrine()->getRepository(Post::class);
+        $repository = $this->getDoctrine()->getRepository(Post::class);
 
-    	$post = $repository->find($id);
+        $post = $repository->find($id);
 
-    	return $this->render('blog/post.html.twig', array(
-          'post' => $post
-      ));
+        return $this->render('blog/post.html.twig', array(
+            'post' => $post
+        ));
     }
 
   /**
-    * @Route("/panel/post/edit/{id}", name="editPost")
+    * @Route("panel/post/edit/{id}", name="editPost")
     */
     public function editPost(Request $request, $id)
     {
-    	$repository = $this->getDoctrine()->getRepository(Post::class);
+        $repository = $this->getDoctrine()->getRepository(Post::class);
 
-      $post = $repository->find($id);
+        $post = $repository->find($id);
 
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class)
@@ -58,56 +70,89 @@ class PostsController extends Controller
             ->add('saveAndExit', SubmitType::class, array('label' => 'Save and Exit'))
             ->getForm();
 
-		  $form->handleRequest($request);
+        $form->handleRequest($request);
 
-	    if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
-	        $post = $form->getData();
+            $date = new DateTime();
 
-	        $em = $this->getDoctrine()->getManager();
-	        $em->persist($post);
-	        $em->flush();
+            $post = $form->getData();
+            $post->setEditionDate($date);
 
-	        if ($form->get('saveAndExit')->isClicked()) {
-            return $this->redirectToRoute('listPosts');
-          }
-	    }            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
 
-    	return $this->render('panel/edit_post.html.twig', array(
-    		'form' => $form->createView()
-    	));
+            if ($form->get('saveAndExit')->isClicked()) {
+                return $this->redirectToRoute('listPosts', array('skip' => 0, 'limit' => 10));
+            }
+        }            
+
+        return $this->render('panel/edit_post.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**
-    * @Route("/panel/post", name="listPosts")
+    * @Route("panel/post/{skip}/{limit}", defaults={"skip" = 0, "limit" = 10}, name="listPosts")
     */
-    public function listPosts()
+    public function listPosts($skip, $limit)
     {
       $repository = $this->getDoctrine()->getRepository(Post::class);
 
+      $limit < 0 ? $limit = 0 : $limit = $limit;
+      $skip < 0 ? $skip = 0 : $skip = $skip;
+
       $posts = $repository->findBy(
         [],
-        [ 'id' => 'DESC' ]
+        [ 'id' => 'DESC' ],
+        $limit,
+        $skip
       );
 
+      $pages = ceil(($repository->count([])/$limit));
+
       return $this->render('panel/posts_panel.html.twig', array(
-          'posts' => $posts
+          'posts' => $posts,
+          'pages' => $pages,
+          'limit' => $limit,
+          'skip' => $skip
         ));
     }
     
   /**
-    * @Route("/post/create", name="createPost")
+    * @Route("create_post", name="createPost")
     */
     public function createPost()
+    {       
+        $date = new DateTime();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $post = new Post();
+        $post->setTitle('New Post');
+        $post->setText('Body Text');
+        $post->setCreationDate($date);
+        $post->setEditionDate($date);
+        
+        $em->persist($post);
+        $em->flush();
+        
+        return $this->redirectToRoute('listPosts');
+    }
+
+  /**
+    * @Route("delete_post/{id}", name="deletePost")
+    */
+    public function deletePost($id)
     {
-    	$em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()->getRepository(Post::class);
+        $em = $this->getDoctrine()->getManager();
 
-    	$post = new Post();
-      $post->setTitle('New Post');
-      $post->setText('Body Text');
+        $post = $repository->find($id);
 
-      $em->persist($post);
-      $em->flush();
+        $em->remove($post);
+        $em->flush();
 
         return $this->redirectToRoute('listPosts');
     }

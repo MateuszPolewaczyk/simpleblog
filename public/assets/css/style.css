@@ -1,9 +1,7 @@
 /* custom styles */
-body {
-  background-image: url('../images/galactic-bg.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+.bg {
+  background: #c5c5c9; /* For browsers that do not support gradients */
+  background: linear-gradient(150deg, #c5c5c9, #ffffff);
 }
 .banner {
   background-image: url('../images/banner-bg.jpg');
@@ -54,4 +52,7 @@ body {
   border: solid 3px white;
   background-color: rgba(67, 109, 188, 0.2);
   font-size: 1.5em;
+}
+.panel-actions {
+  border-bottom: solid 1px gray;
 }

@@ -15,7 +15,8 @@
     {% endblock %}
     <title>{% block title %}{{ macros.print_path() }}{% endblock %}</title>
   </head>
-  <body>
+  <body class="bg">
+    {% include 'env_info_bar.html.twig' %}
     {% block nav %}
     <div class="row">
       <div class="col-12 text-white text-center p-2 top-info-bar">
@@ -34,7 +35,7 @@
           <div class="dropdown-menu" aria-labelledby="navigationButton">
             <a class="dropdown-item" href="{{ path('home') }}">Home</a>
             <a class="dropdown-item" href="{{ path('gallery') }}">Gallery</a>
-            <a class="dropdown-item" href="{{ path('post') }}">Posts</a>
+            <a class="dropdown-item" href="{{ path('post', {skip: 0, limit: 10}) }}">Posts</a>
             <a class="dropdown-item" href="{{ path('about') }}">About</a>
           </div>
         </div>
@@ -62,7 +63,7 @@
               <a class="nav-link {{ macros.is_active('gallery') }}" href="{{ path('gallery') }}">Gallery</a>
             </li>
             <li class="nav-item text-center">
-              <a class="nav-link {{ macros.is_active('post') }}" href="{{ path('post') }}">Posts</a>
+              <a class="nav-link {{ macros.is_active('post') }}" href="{{ path('post', {skip: 0, limit: 5}) }}">Posts</a>
             </li>
             <li class="nav-item text-center">
               <a class="nav-link {{ macros.is_active('about') }}" href="{{ path('about') }}">About</a>

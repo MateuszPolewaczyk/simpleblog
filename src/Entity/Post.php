@@ -32,6 +32,16 @@ class Post
      */
     private $author;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $editedAt;
+
     public function getId()
     {
         return $this->id;
@@ -65,6 +75,26 @@ class Post
     public function setAuthor(User $author)
     {
         $this->author = $author;
+    }
+
+    public function getCreationDate()
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreationDate($date)
+    {
+        $this->createdAt = $date;
+    }
+
+    public function getEditionDate()
+    {
+        return $this->editedAt;
+    }
+
+    public function setEditionDate($date)
+    {
+        $this->editedAt = $date;
     }
 }
 
